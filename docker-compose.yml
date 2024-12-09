@@ -1,0 +1,94 @@
+services:
+
+
+
+  api:
+    image: tri-api:latest
+    container_name: tri-api
+    ports:
+      - 8080:8080
+    env_file:
+      - dev.env
+    networks:
+      - tri_network
+    volumes:
+      - .:/usr/src/app
+    restart: unless-stopped
+
+
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    env_file:
+      - dev.env
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - tri_network
+    restart: unless-stopped
+
+
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    env_file:
+      - dev.env
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      - tri_network
+    restart: unless-stopped
+
+
+
+  tri_worker:
+    image: tri-api:latest
+    container_name: tri-worker
+    entrypoint: []  
+    command: [
+      "celery",
+      "--app=tri_api.celery.app.tri_api_celery_app",
+      "worker",
+      "--loglevel=INFO",
+      "--queues=tri",
+      "--without-gossip",
+      "--without-mingle",
+      "--without-heartbeat",
+      "-Ofair",
+      --pool=solo,
+      "--hostname=tri_worker@%h",
+      "--max-tasks-per-child=1000"
+    ]
+    working_dir: /usr/src/app 
+    env_file:
+      - dev.env
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - tri_network
+    depends_on:
+      - rabbitmq
+      - mongodb
+      - api
+    restart: unless-stopped
+
+
+
+
+volumes:
+  mongodb_data:
+    name: mongodb_data
+  rabbitmq_data:
+    name: rabbitmq_data
+
+
+networks:
+  tri_network:
+    name: tri_network
