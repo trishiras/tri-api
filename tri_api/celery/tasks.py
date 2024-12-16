@@ -1,5 +1,6 @@
 import os
 import json
+import secrets
 import tarfile
 import asyncio
 import traceback
@@ -10,10 +11,11 @@ from tri_api.core.logger import logger
 from tri_api.models.trove.cve import CVE
 from tri_api.support.enums import AWSOption
 from tri_api.support.config import CONFIGURATION
-from tri_api.celery.app import tri_api_celery_app
 from motor.motor_asyncio import AsyncIOMotorClient
+from tri_api.models.tenant.tenant import InviteToken
 from tri_api.models.trove.taxonomy import CWE, CAPEC
 from tri_api.aws.utils import scrape, create_presigned_link
+from tri_api.celery.app import async_to_sync, tri_api_celery_app
 
 
 async def init_database():
@@ -145,16 +147,26 @@ async def populate_database():
         logger.debug(traceback.format_exc())
 
 
+@async_to_sync
+async def sample_func():
+    pass
+
+
+@tri_api_celery_app.task()
+def sample_task():
+    sample_func()
+
+
 @tri_api_celery_app.task(
-    name="important_task",
+    name="test_task",
     queue="tri",
     exchange="tri",
     routing_key="tri",
     max_retries=3,
 )
-def important_task():
+def test_task():
     for i in range(10):
-        logger.info(f"Running important task {i}")
+        logger.info(f"Running test task {i}")
 
 
 @tri_api_celery_app.task(
