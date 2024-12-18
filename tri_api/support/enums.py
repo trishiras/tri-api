@@ -100,7 +100,7 @@ class RouteEnum(Enum):
     add_invite = "/invite"
     register = "/register"
     super_user = "/super-user"
-    fetch_task = "/fetch_task"
+    fetch_task = "/fetch-task"
     update_task = "/update-task"
     update_member = "/update-member"
     verify_token = "/verify/{token}"

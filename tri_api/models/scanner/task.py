@@ -19,6 +19,7 @@ class ScannerTaskBase(BaseModel):
     status: Optional[str] = Field(default=None)
     result_url: Optional[str] = Field(default=None)
     status_message: Optional[str] = Field(default=None)
+    synced: bool = Field(default=False)
 
 
 class ScannerTask(Document):
@@ -31,6 +32,7 @@ class ScannerTask(Document):
     status: Optional[str] = Field(default=None)
     result_url: Optional[str] = Field(default=None)
     status_message: Optional[str] = Field(default=None)
+    synced: bool = Field(default=False)
     date_time: datetime = Field(default=datetime.now())
 
     @classmethod
@@ -57,6 +59,7 @@ class ScannerTask(Document):
         scanner_task.status = task.status
         scanner_task.result_url = task.result_url
         scanner_task.status_message = task.status_message
+        scanner_task.synced = task.synced
 
         await scanner_task.save()
 
@@ -74,3 +77,4 @@ class ScannerTaskUpdate(SuperUserLogin):
     status: Optional[str] = Field(default=None)
     result_url: Optional[str] = Field(default=None)
     status_message: Optional[str] = Field(default=None)
+    synced: bool = Field(default=False)

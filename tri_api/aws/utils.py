@@ -90,7 +90,12 @@ def scrape(
     session = requests.Session()
 
     if allowed_status_forcelist is None:
-        allowed_status_forcelist = [403, 502, 503, 504]
+        allowed_status_forcelist = [
+            403,
+            502,
+            503,
+            504,
+        ]
 
     try:
         if schema not in ["http", "https"]:
