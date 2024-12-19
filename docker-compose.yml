@@ -2,7 +2,7 @@ services:
 
 
 
-  api:
+  tri-api:
     image: tri-api:latest
     container_name: tri-api
     ports:
@@ -17,40 +17,44 @@ services:
 
 
 
-  mongodb:
+  tri-api-mongodb:
     image: mongo:latest
-    container_name: mongodb
+    container_name: tri-api-mongodb
     env_file:
       - dev.env
+    expose:
+      - 27017
     ports:
       - 27017:27017
     volumes:
-      - mongodb_data:/data/db
+      - tri_api_mongodb_data:/data/db
     networks:
       - tri_network
     restart: unless-stopped
 
 
 
-  rabbitmq:
+  tri-api-rabbitmq:
     image: rabbitmq:3-management
-    container_name: rabbitmq
+    container_name: tri-api-rabbitmq
     env_file:
       - dev.env
+    expose:
+      - 5672
     ports:
       - 5672:5672
       - 15672:15672
     volumes:
-      - rabbitmq_data:/var/lib/rabbitmq
+      - tri_api_rabbitmq_data:/var/lib/rabbitmq
     networks:
       - tri_network
     restart: unless-stopped
 
 
 
-  tri_worker:
+  tri-api-worker:
     image: tri-api:latest
-    container_name: tri-worker
+    container_name: tri-api-worker
     entrypoint: []  
     command: [
       "celery",
@@ -74,19 +78,19 @@ services:
     networks:
       - tri_network
     depends_on:
-      - rabbitmq
-      - mongodb
-      - api
+      - tri-api-rabbitmq
+      - tri-api-mongodb
+      - tri-api
     restart: unless-stopped
 
 
 
 
 volumes:
-  mongodb_data:
-    name: mongodb_data
-  rabbitmq_data:
-    name: rabbitmq_data
+  tri_api_mongodb_data:
+    name: tri_api_mongodb_data
+  tri_api_rabbitmq_data:
+    name: tri_api_rabbitmq_data
 
 
 networks:
