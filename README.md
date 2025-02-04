@@ -94,13 +94,13 @@ The project is organized as follows:
 ## Building the Docker Image
 
 
-1. Build the Docker image using the following command:
+Build the Docker image using the following command:
 
-   ```bash
-   sudo docker build --no-cache . -f Dockerfile -t tri-api:latest
-   ```
+```bash
+sudo docker build --no-cache . -f Dockerfile -t tri-api:latest
+```
 
-   This command builds a Docker image named tri-api based on the instructions in the Dockerfile.
+This command builds a Docker image named tri-api based on the instructions in the Dockerfile.
 
 
 
