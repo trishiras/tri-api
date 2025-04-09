@@ -7,12 +7,28 @@ services:
     container_name: tri-api
     ports:
       - 8080:8080
+    expose:
+      - 8080
     env_file:
       - dev.env
     networks:
       - tri_network
     volumes:
       - .:/usr/src/app
+    restart: unless-stopped
+
+
+  tri-nginx:
+    image: nginx:latest
+    container_name: tri-nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - tri-api
+    networks:
+      - tri_network
     restart: unless-stopped
 
 
