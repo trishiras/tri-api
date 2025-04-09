@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>Trove - Security Search</title>
+    <style>
+        /* body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #1a103c;
+            color: #ffffff;
+            height: 100vh;
+            overflow-x: hidden;
+            text-align: center; 
+        }       
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #0c0621;
+        }      
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            letter-spacing: 1px;
+        }       
+        .tm {
+            font-size: 10px;
+            vertical-align: super;
+        }      
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+            padding: 40px 20px;
+            min-height: calc(100vh - 80px);
+            position: relative;
+            transition: all 0.5s ease;
+            width: 100%; 
+            box-sizing: border-box; 
+        }       
+        .title {
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: all 0.5s ease;
+            width: 100%; 
+        }       
+        .description {
+            font-size: 16px;
+            color: #b4a9cf;
+            max-width: 700px;
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            transition: all 0.5s ease;
+            margin-left: auto; 
+            margin-right: auto; 
+            padding: 0 20px; 
+        }       
+        .search-container {
+            position: relative;
+            width: 600px;
+            max-width: 100%;
+            transition: all 0.5s ease;
+            margin: 0 auto; 
+        }        
+        .search-box {
+            width: 100%;
+            padding: 15px 45px 15px 45px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #251a47;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            box-sizing: border-box; 
+        }       
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c5fa7;
+        }       
+        .clear-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6c5fa7;
+            cursor: pointer;
+            font-size: 18px;
+        }       
+        .search-box:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #6c5fa7;
+        }       
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #251a47;
+            border-radius: 4px;
+            margin-top: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 10;
+            text-align: left; 
+        }      
+        .dropdown-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #382b61;
+        }   
+        .dropdown-item:hover {
+            background-color: #382b61;
+        }
+        .cve-details {
+            width: 1600px;
+            max-width: 90%;
+            margin-top: 40px;
+            background-color: #251a47;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            display: none;
+            text-align: left; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        .cve-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #382b61;
+        }
+        .cve-title {
+            font-size: 24px;
+            font-weight: bold;
+        }       
+        .cve-severity {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+        }   
+        .severity-high, .severity-5 {
+            background-color: #e53935;
+            color: white;
+        }
+        .severity-medium, .severity-4, .severity-3 {
+            background-color: #fb8c00;
+            color: white;
+        }
+        .severity-low, .severity-2, .severity-1 {
+            background-color: #43a047;
+            color: white;
+        }
+        .cve-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .cve-section {
+            margin-bottom: 20px;
+        }
+        .cve-section-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #a696d2;
+        }
+        .cve-description {
+            line-height: 1.6;
+            color: #d1c9e8;
+        }
+        .cve-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        .cve-table th, .cve-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #382b61;
+        }
+        .globe-container {
+            position: absolute;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            z-index: -1;
+            transition: all 0.5s ease;
+        }
+        .globe {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 60px #5e32a8,
+                inset 0 0 60px rgba(94, 50, 168, 0.2);
+            position: relative;
+            overflow: hidden;
+
+        }
+        .circle {
+            position: absolute;
+            border: 1px solid #5e32a8;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        #c1 {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+        }
+        #c2 {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+        }
+        #c3 {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #8f77e0;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .content.minimized {
+            align-items: flex-start;
+            padding-top: 20px;
+        }
+        .content.minimized .title,
+        .content.minimized .description {
+            display: none;
+        }
+        .content.minimized .search-container {
+            width: 300px;
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        .content.minimized .search-box {
+            padding: 10px 35px 10px 35px;
+            font-size: 14px;
+        }     
+        .content.minimized .globe-container {
+            display: none;
+        }
+        .content.minimized .cve-details {
+            margin-top: 10px;
+            margin-left: 30px;
+        }       
+        .back-btn {
+            display: none;
+            margin-bottom: 10px;
+            background-color: #382b61;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .content.minimized .back-btn {
+            display: inline-block;
+            margin-left: 30px;
+        }
+        .back-btn:hover {
+            background-color: #4e3c80;
+        }
+        .exploit-badge {
+            display: inline-block;
+            background-color: #e53935;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .zeroday-badge {
+            display: inline-block;
+            background-color: #ff6d00;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .cve-extra-info {
+            margin-top: 20px;
+            border-top: 1px solid #382b61;
+            padding-top: 20px;
+        }
+        .remediation-item {
+            background-color: #1a103c;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+       
+       @media screen and (max-width: 768px) {
+            .globe-container {
+                display: none;
+            }
+            .search-container {
+                width: 90%;
+                margin: 0 auto; 
+            }
+            .description {
+                padding: 0 15px; 
+            }
+            .cve-info {
+                grid-template-columns: 1fr;
+            }
+        } */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background-color: #1e2130;
+            color: #ffffff;
+            height: 100vh;
+            overflow-x: hidden;
+            text-align: center; 
+        }       
+        /* .header {
+            display: flex;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: #171923;
+        }       */
+        .header {
+            /* position: fixed; */
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: #171923;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }       
+        .tm {
+            font-size: 10px;
+            vertical-align: super;
+        }      
+        .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: center;
+            padding: 40px 20px;
+            min-height: calc(100vh - 80px);
+            position: relative;
+            transition: all 0.5s ease;
+            width: 100%; 
+            box-sizing: border-box; 
+        }       
+        .title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: center;
+            transition: all 0.5s ease;
+            width: 100%; 
+        }       
+        .description {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            color: #a0aec0;
+            max-width: 700px;
+            text-align: center;
+            margin-bottom: 40px;
+            line-height: 1.6;
+            transition: all 0.5s ease;
+            margin-left: auto; 
+            margin-right: auto; 
+            padding: 0 20px; 
+        }       
+        .search-container {
+            position: relative;
+            width: 600px;
+            max-width: 100%;
+            transition: all 0.5s ease;
+            margin: 0 auto; 
+        }        
+        .search-box {
+            width: 100%;
+            padding: 15px 45px 15px 45px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #2d3748;
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s ease;
+            box-sizing: border-box; 
+        }   
+        .search-box::placeholder {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }   
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #718096;
+        }       
+        .clear-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #718096;
+            cursor: pointer;
+            font-size: 18px;
+        }       
+        .search-box:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #4a5568;
+        }       
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #2d3748;
+            border-radius: 4px;
+            margin-top: 4px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            display: none;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 10;
+            text-align: left; 
+        }      
+        .dropdown-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #3a4859;
+        }   
+        .dropdown-item:hover {
+            background-color: #3a4859;
+        }
+        .cve-details {
+            width: 1600px;
+            max-width: 90%;
+            margin-top: 40px;
+            background-color: #2d3748;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            display: none;
+            text-align: left; 
+            margin-left: auto; 
+            margin-right: auto; 
+        }
+        .cve-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #3a4859;
+        }
+        .cve-title {
+            /* font-family: 'Orbitron', sans-serif; */
+            font-size: 24px;
+            font-weight: bold;
+        }       
+        .cve-severity {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+        }   
+        .severity-high, .severity-5 {
+            background-color: #e53935;
+            color: white;
+        }
+        .severity-medium, .severity-4, .severity-3 {
+            background-color: #fb8c00;
+            color: white;
+        }
+        .severity-low, .severity-2, .severity-1 {
+            background-color: #43a047;
+            color: white;
+        }
+        .cve-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .cve-section {
+            margin-bottom: 20px;
+        }
+        .cve-section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #90cdf4;
+        }
+        .cve-description {
+            line-height: 1.6;
+            color: #cbd5e0;
+        }
+        .cve-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        .cve-table th, .cve-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid #3a4859;
+        }
+        .globe-container {
+            position: absolute;
+            right: 10%;
+            width: 300px;
+            height: 300px;
+            z-index: -1;
+            transition: all 0.5s ease;
+        }
+        .globe {
+            width: 100%;
+            height: 100%;
+            background-color: #171923;
+            border-radius: 50%;
+            box-shadow: 
+                0 0 60px #4299e1,
+                inset 0 0 60px rgba(66, 153, 225, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        .circle {
+            position: absolute;
+            border: 1px solid #4299e1;
+            border-radius: 50%;
+            opacity: 0.7;
+        }
+        #c1 {
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+        }
+        #c2 {
+            width: 60%;
+            height: 60%;
+            top: 20%;
+            left: 20%;
+        }
+        #c3 {
+            width: 40%;
+            height: 40%;
+            top: 30%;
+            left: 30%;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid #63b3ed;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .content.minimized {
+            align-items: flex-start;
+            padding-top: 20px;
+        }
+        .content.minimized .title,
+        .content.minimized .description {
+            display: none;
+        }
+        .content.minimized .search-container {
+            width: 300px;
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        .content.minimized .search-box {
+            padding: 10px 35px 10px 35px;
+            font-size: 14px;
+        }     
+        .content.minimized .globe-container {
+            display: none;
+        }
+        .content.minimized .cve-details {
+            margin-top: 10px;
+            margin-left: 30px;
+        }       
+        .back-btn {
+            display: none;
+            margin-bottom: 10px;
+            background-color: #3a4859;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .content.minimized .back-btn {
+            display: inline-block;
+            margin-left: 30px;
+        }
+        .back-btn:hover {
+            background-color: #4a5568;
+        }
+        .exploit-badge {
+            display: inline-block;
+            background-color: #e53935;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .zeroday-badge {
+            display: inline-block;
+            background-color: #ff6d00;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .cve-extra-info {
+            margin-top: 20px;
+            border-top: 1px solid #3a4859;
+            padding-top: 20px;
+        }
+        .remediation-item {
+            background-color: #1e2130;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .globe-container {
+                display: none;
+            }
+            .search-container {
+                width: 90%;
+                margin: 0 auto; 
+            }
+            .description {
+                padding: 0 15px; 
+            }
+            .cve-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Trove<span class="tm">™</span></div>
+    </div>
+    
+    <div class="content" id="main-content">
+        <button class="back-btn" id="back-button">← Back to Search</button>
+        
+        <h1 class="title">Welcome to Trove</h1>
+        <p class="description">
+            Trove search engine offers a comprehensive and up-to-date archive of vulnerabilities, exploits, and CVEs, specifically targeting platforms and applications of interest.
+        </p>
+        
+        <div class="search-container">
+            <input type="text" class="search-box" id="search-input" placeholder="Search for CVE"  autofocus>
+            <span class="clear-icon" id="clear-button">×</span>
+            
+            <div class="dropdown" id="search-dropdown"></div>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <div>Loading CVE details...</div>
+        </div>
+        
+        <div class="cve-details" id="cve-details">
+            <div class="cve-header">
+                <div>
+                    <span class="cve-title" id="cve-title">CVE-2023-1234</span>
+                    <span id="exploit-badge" class="exploit-badge" style="display: none;">Exploit Available</span>
+                    <span id="zeroday-badge" class="zeroday-badge" style="display: none;">Zero-day</span>
+                </div>
+                <div class="cve-severity severity-high" id="cve-severity">HIGH</div>
+            </div>
+            
+            <div class="cve-info">
+                <div class="cve-section">
+                    <div class="cve-section-title">Description</div>
+                    <div class="cve-description" id="cve-description">
+                        Description of the vulnerability will be displayed here.
+                    </div>
+                </div>
+                
+                <div class="cve-section">
+                    <div class="cve-section-title">Details</div>
+                    <table class="cve-table">
+                        <tr>
+                            <td>CVSS Score</td>
+                            <td id="cve-base-score">8.5</td>
+                        </tr>
+                        <tr>
+                            <td>CVSS Vector</td>
+                            <td id="cve-vector">CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H</td>
+                        </tr>
+                        <tr>
+                            <td>EPSS Score</td>
+                            <td id="cve-epss-score">N/A</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <div class="cve-section">
+                    <div class="cve-section-title">Affected Products</div>
+                    <div id="cve-affected-products"></div>
+                </div>
+                
+                <div class="cve-section">
+                    <div class="cve-section-title">Exploits</div>
+                    <div id="cve-exploits"></div>
+                </div>
+            </div>
+            
+            <div class="cve-extra-info">
+                <div class="cve-section">
+                    <div class="cve-section-title">Remediations</div>
+                    <div id="cve-remediations"></div>
+                </div>
+                
+                <div class="cve-section">
+                    <div class="cve-section-title">References</div>
+                    <div id="cve-references"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- <div class="globe-container">
+            <div class="globe">
+                <div class="circle" id="c1"></div>
+                <div class="circle" id="c2"></div>
+                <div class="circle" id="c3"></div>
+            </div>
+        </div> -->
+    </div>
+    
+    <script>
+        const searchInput = document.getElementById('search-input');
+        const searchDropdown = document.getElementById('search-dropdown');
+        const clearButton = document.getElementById('clear-button');
+        const cveDetails = document.getElementById('cve-details');
+        const loading = document.getElementById('loading');
+        const mainContent = document.getElementById('main-content');
+        const backButton = document.getElementById('back-button');
+        
+        // Function to fetch search results
+        async function fetchSearchResults(query) {
+            try {
+                const response = await fetch(`http://192.168.1.5:8080/api/trove/search/?query=${encodeURIComponent(query)}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching search results:', error);
+                return getMockResults(query); // Fallback to mock data
+            }
+        }
+        
+        // Function to fetch CVE details
+        async function fetchCveDetails(cveId) {
+            try {
+                loading.style.display = 'block';
+                cveDetails.style.display = 'none';
+                
+                // Extract just the CVE ID from the clicked item
+                const cveMatch = cveId.match(/CVE-\d+-\d+/);
+                if (!cveMatch) {
+                    throw new Error('Invalid CVE format');
+                }
+                
+                const cve = cveMatch[0];
+                const response = await fetch(`http://192.168.1.5:80/api/trove/cve/${cve}`);
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                console.error('Error fetching CVE details:', error);
+                return getMockCveDetails(cveId); // Fallback to mock data
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+        
+        // Function to update dropdown with search results
+        async function updateDropdown(query) {
+            if (!query || query.length < 2) {
+                searchDropdown.style.display = 'none';
+                return;
+            }
+            
+            const results = await fetchSearchResults(query);
+            
+            // Clear previous results
+            searchDropdown.innerHTML = '';
+            
+            if (results && results.length > 0) {
+                results.forEach(result => {
+                    const item = document.createElement('div');
+                    item.className = 'dropdown-item';
+                    item.textContent = result;
+                    item.addEventListener('click', async () => {
+                        searchInput.value = result;
+                        searchDropdown.style.display = 'none';
+                        
+                        // Minimize the search interface
+                        mainContent.classList.add('minimized');
+                        
+                        // Fetch and display CVE details
+                        const details = await fetchCveDetails(result);
+                        displayCveDetails(details);
+                    });
+                    searchDropdown.appendChild(item);
+                });
+                searchDropdown.style.display = 'block';
+            } else {
+                searchDropdown.style.display = 'none';
+            }
+        }
+        
+        // Function to restore normal search view
+        function restoreSearchView() {
+            mainContent.classList.remove('minimized');
+            cveDetails.style.display = 'none';
+            searchInput.focus();
+        }
+        
+        // Function to display CVE details
+        function displayCveDetails(data) {
+            if (!data) return;
+            
+            // Update title and basic info
+            document.getElementById('cve-title').textContent = data._id || data.id;
+            
+            // Set exploit badge visibility
+            const exploitBadge = document.getElementById('exploit-badge');
+            if (data.exploits && data.exploits.exploit_available) {
+                exploitBadge.style.display = 'inline-block';
+            } else {
+                exploitBadge.style.display = 'none';
+            }
+            
+            // Set zeroday badge visibility
+            const zerodayBadge = document.getElementById('zeroday-badge');
+            if (data.zeroday && data.zeroday.is_zeroday) {
+                zerodayBadge.style.display = 'inline-block';
+            } else {
+                zerodayBadge.style.display = 'none';
+            }
+            
+            // Set severity class
+            const severityElem = document.getElementById('cve-severity');
+            let severityText = "MEDIUM";
+            let severityClass = "severity-medium";
+            
+            if (data.taxonomy && data.taxonomy.cvss) {
+                // Use CVSS 3.1 if available, otherwise 2.0
+                const cvss = data.taxonomy.cvss["3.1"] || data.taxonomy.cvss["2.0"];
+                if (cvss) {
+                    if (cvss.severity === 5 || cvss.score >= 9.0) {
+                        severityText = "HIGH";
+                        severityClass = "severity-high";
+                    } else if (cvss.severity >= 3 || cvss.score >= 6.0) {
+                        severityText = "MEDIUM";
+                        severityClass = "severity-medium";
+                    } else {
+                        severityText = "LOW";
+                        severityClass = "severity-low";
+                    }
+                }
+            } else if (data.severity) {
+                // Fallback to severity property if available
+                severityText = data.severity.toUpperCase();
+                severityClass = `severity-${data.severity.toLowerCase()}`;
+            }
+            
+            severityElem.textContent = severityText;
+            severityElem.className = `cve-severity ${severityClass}`;
+            
+            // Update description
+            document.getElementById('cve-description').textContent = data.description;
+            
+            // Update CVSS score
+            let baseScore = "N/A";
+            let vector = "N/A";
+            
+            if (data.taxonomy && data.taxonomy.cvss) {
+                const cvss31 = data.taxonomy.cvss["3.1"];
+                const cvss2 = data.taxonomy.cvss["2.0"];
+                
+                if (cvss31) {
+                    baseScore = cvss31.score;
+                    vector = cvss31.vector;
+                } else if (cvss2) {
+                    baseScore = cvss2.score;
+                    vector = cvss2.vector;
+                }
+            } else if (data.cvss_score) {
+                baseScore = data.cvss_score;
+                vector = data.cvss_vector || "N/A";
+            }
+            
+            document.getElementById('cve-base-score').textContent = baseScore;
+            document.getElementById('cve-vector').textContent = vector;
+            document.getElementById('cve-epss-score').textContent = data.epss_score ? `${(data.epss_score * 100).toFixed(2)}%` : "N/A";
+            
+            // Update affected products
+            const productsElem = document.getElementById('cve-affected-products');
+            productsElem.innerHTML = '';
+            if (data.taxonomy && data.taxonomy.cpes && data.taxonomy.cpes.length > 0) {
+                const productsList = document.createElement('ul');
+                productsList.style.margin = '0';
+                productsList.style.paddingLeft = '20px';
+                
+                // Get unique products
+                const uniqueProducts = [];
+                data.taxonomy.cpes.forEach(cpe => {
+                    if (cpe.vendor && cpe.product) {
+                        const productString = `${cpe.vendor} ${cpe.product} ${cpe.version || "*"}`;
+                        if (!uniqueProducts.includes(productString)) {
+                            uniqueProducts.push(productString);
+                        }
+                    }
+                });
+                
+                uniqueProducts.forEach(product => {
+                    const item = document.createElement('li');
+                    item.textContent = product;
+                    productsList.appendChild(item);
+                });
+                
+                productsElem.appendChild(productsList);
+            } else {
+                productsElem.textContent = 'No specific products listed';
+            }
+            
+            // Update exploits
+            const exploitsElem = document.getElementById('cve-exploits');
+            exploitsElem.innerHTML = '';
+            if (data.exploits && data.exploits.references && data.exploits.references.length > 0) {
+                const exploitsList = document.createElement('ul');
+                exploitsList.style.margin = '0';
+                exploitsList.style.paddingLeft = '20px';
+                
+                data.exploits.references.forEach(ref => {
+                    const item = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = ref.url;
+                    link.textContent = `${ref.source} - ${ref.type}`;
+                    link.target = '_blank';
+                    link.style.color = '#a696d2';
+                    item.appendChild(link);
+                    exploitsList.appendChild(item);
+                });
+                
+                exploitsElem.appendChild(exploitsList);
+            } else {
+                exploitsElem.textContent = 'No exploit information available';
+            }
+            
+            // Update remediations
+            const remediationsElem = document.getElementById('cve-remediations');
+            remediationsElem.innerHTML = '';
+            if (data.remediations && data.remediations.length > 0) {
+                data.remediations.forEach(rem => {
+                    const remBox = document.createElement('div');
+                    remBox.className = 'remediation-item';
+                    
+                    const remSource = document.createElement('div');
+                    remSource.style.fontWeight = 'bold';
+                    remSource.style.marginBottom = '8px';
+                    remSource.textContent = `Source: ${rem.source}`;
+                    
+                    const remDesc = document.createElement('div');
+                    remDesc.textContent = rem.description;
+                    
+                    remBox.appendChild(remSource);
+                    remBox.appendChild(remDesc);
+                    
+                    remediationsElem.appendChild(remBox);
+                });
+            } else {
+                remediationsElem.textContent = 'No remediation information available';
+            }
+            
+            // Update references
+            const refsElem = document.getElementById('cve-references');
+            refsElem.innerHTML = '';
+            
+            let references = [];
+            if (data.references && data.references.length > 0) {
+                references = data.references;
+            } else if (data.zeroday && data.zeroday.references) {
+                references = data.zeroday.references.map(ref => ref.url);
+            }
+            
+            if (references.length > 0) {
+                const refsList = document.createElement('ul');
+                refsList.style.margin = '0';
+                refsList.style.paddingLeft = '20px';
+                
+                references.forEach(ref => {
+                    const item = document.createElement('li');
+                    const link = document.createElement('a');
+                    link.href = typeof ref === 'string' ? ref : ref.url;
+                    link.textContent = typeof ref === 'string' ? ref : ref.url;
+                    link.target = '_blank';
+                    link.style.color = '#a696d2';
+                    item.appendChild(link);
+                    refsList.appendChild(item);
+                });
+                
+                refsElem.appendChild(refsList);
+            } else {
+                refsElem.textContent = 'No references available';
+            }
+            
+            // Show the details section
+            cveDetails.style.display = 'block';
+        }
+        
+        // Event listener for input changes
+        let debounceTimer;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                updateDropdown(searchInput.value);
+            }, 300);
+        });
+        
+        // Event listener for clear button
+        clearButton.addEventListener('click', () => {
+            searchInput.value = '';
+            searchDropdown.style.display = 'none';
+            searchInput.focus();
+            
+            if (mainContent.classList.contains('minimized')) {
+                restoreSearchView();
+            }
+        });
+        
+        // Event listener for back button
+        backButton.addEventListener('click', () => {
+            restoreSearchView();
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (event) => {
+            if (!searchInput.contains(event.target) && !searchDropdown.contains(event.target)) {
+                searchDropdown.style.display = 'none';
+            }
+        });
+        
+        // For demo purposes - mock data to simulate API response
+        function getMockResults(query) {
+            const mockData = [
+                'CVE-2023-1234: Apache Log4j Remote Code Execution',
+                'CVE-2023-5678: Microsoft Windows Elevation of Privilege',
+                'CVE-2022-9876: OpenSSL Buffer Overflow',
+                'CVE-2022-5432: Linux Kernel Memory Corruption',
+                'CVE-2021-44228: Log4j JNDI Remote Code Execution'
+            ];
+            
+            return mockData.filter(item => 
+                item.toLowerCase().includes(query.toLowerCase())
+            );
+        }
+        // For demo purposes - mock CVE detail data
+        function getMockCveDetails(cveId) {
+            const cveMatch = cveId.match(/CVE-\d+-\d+/);
+            const cve = cveMatch ? cveMatch[0] : 'CVE-2023-1234';
+            
+            if (cve === 'CVE-2021-44228') {
+                return {
+                    "_id": "CVE-2021-44228",
+                    "title": "National Vulnerability Database Advisory",
+                    "description": "Apache Log4j2 2.0-beta9 through 2.15.0 (excluding security releases 2.12.2, 2.12.3, and 2.3.1) JNDI features used in configuration, log messages, and parameters do not protect against attacker controlled LDAP and other JNDI related endpoints. An attacker who can control log messages or log message parameters can execute arbitrary code loaded from LDAP servers when message lookup substitution is enabled. From log4j 2.15.0, this behavior has been disabled by default. From version 2.16.0 (along with 2.12.2, 2.12.3, and 2.3.1), this functionality has been completely removed. Note that this vulnerability is specific to log4j-core and does not affect log4net, log4cxx, or other Apache Logging Services projects.",
+                    "exploits": {
+                        "exploit_available": true,
+                        "references": [
+                            {
+                                "source": "exploitdb",
+                                "type": "EXPLOIT",
+                                "url": "https://gitlab.com/exploit-database/exploitdb/blob/master/files_exploits.csv"
+                            },
+                            {
+                                "source": "exploitdb",
+                                "type": "EXPLOIT",
+                                "url": "https://gitlab.com/exploit-database/exploitdb/blob/master/exploits/java/remote/50590.py"
+                            },
+                            {
+                                "source": "exploitdb",
+                                "type": "EXPLOIT",
+                                "url": "https://gitlab.com/exploit-database/exploitdb/blob/master/exploits/java/remote/51183.txt"
+                            },
+                            {
+                                "source": "exploitdb",
+                                "type": "EXPLOIT",
+                                "url": "https://gitlab.com/exploit-database/exploitdb/blob/master/exploits/java/remote/50592.py"
+                            }
+                        ]
+                    },
+                    "zeroday": {
+                        "is_zeroday": true,
+                        "references": [
+                            {
+                                "source": "cisa_exploits",
+                                "type": "WEB",
+                                "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-44228"
+                            }
+                        ]
+                    },
+                    "seen_wild": false,
+                    "priority_score": null,
+                    "epss_score": 0.96886,
+                    "taxonomy": {
+                        "cvss": {
+                            "2.0": {
+                                "version": "2.0",
+                                "severity": 5,
+                                "score": 9.3,
+                                "vector": "AV:N/AC:M/Au:N/C:C/I:C/A:C"
+                            },
+                            "3.1": {
+                                "version": "3.1",
+                                "severity": 5,
+                                "score": 10.0,
+                                "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:H/A:H"
+                            }
+                        },
+                        "cwe": {
+                            "CWE-20": {
+                                "cwe_id": "CWE-20",
+                                "name": "Improper Input Validation",
+                                "description": "The product does not validate or incorrectly validates input that can affect the control flow or data flow of a program."
+                            },
+                            "CWE-400": {
+                                "cwe_id": "CWE-400",
+                                "name": "Uncontrolled Resource Consumption",
+                                "description": "The software does not properly control the allocation and maintenance of a limited resource, thereby enabling an actor to influence the amount of resources consumed, eventually leading to the exhaustion of available resources."
+                            },
+                            "CWE-502": {
+                                "cwe_id": "CWE-502",
+                                "name": "Deserialization of Untrusted Data",
+                                "description": "The application deserializes untrusted data without sufficiently verifying that the resulting data will be valid."
+                            }
+                        },
+                        "cpes": [
+                            {
+                                "cpe_string": "cpe:2.3:a:apache:log4j:2.0:rc1:*:*:*:*:*:*",
+                                "part": "a",
+                                "vendor": "apache",
+                                "product": "log4j",
+                                "version": "2.0"
+                            },
+                            {
+                                "cpe_string": "cpe:2.3:a:apache:log4j:2.0:beta9:*:*:*:*:*:*",
+                                "part": "a",
+                                "vendor": "apache",
+                                "product": "log4j",
+                                "version": "2.0"
+                            },
+                            {
+                                "cpe_string": "cpe:2.3:a:apache:log4j:2.0:rc2:*:*:*:*:*:*",
+                                "part": "a",
+                                "vendor": "apache",
+                                "product": "log4j",
+                                "version": "2.0"
+                            },
+                            {
+                                "cpe_string": "cpe:2.3:a:apache:log4j:2.0:-:*:*:*:*:*:*",
+                                "part": "a",
+                                "vendor": "apache",
+                                "product": "log4j",
+                                "version": "2.0"
+                            },
+                            {
+                                "cpe_string": "cpe:2.3:a:apache:log4j:*:*:*:*:*:*:*:*",
+                                "part": "a",
+                                "vendor": "apache",
+                                "product": "log4j",
+                                "version": "*"
+                            }
+                        ],
+                        "wasc": {},
+                        "capec": {},
+                        "owasp": []
+                    },
+                    "remediations": [
+                        {
+                            "source": "cisa_exploits",
+                            "description": "For all affected software assets for which updates exist, the only acceptable remediation actions are: 1) Apply updates; OR 2) remove affected assets from agency networks. Temporary mitigations using one of the measures provided at https://www.cisa.gov/uscert/ed-22-02-apache-log4j-recommended-mitigation-measures are only acceptable until updates are available.",
+                            "references": []
+                        }
+                    ],
+                    "references": [
+                        "https://logging.apache.org/log4j/2.x/security.html",
+                        "https://github.com/apache/logging-log4j2/pull/608",
+                        "https://nvd.nist.gov/vuln/detail/CVE-2021-44228",
+                        "https://github.com/NCSC-NL/log4shell/tree/main/iocs"
+                    ]
+                };
+            } else if (cve === 'CVE-2023-1234') {
+                return {
+                    "_id": "CVE-2023-1234",
+                    "title": "Apache Web Server Remote Code Execution",
+                    "description": "A remote code execution vulnerability in Apache HTTP Server 2.4.50 and earlier allows an attacker to execute arbitrary code on the target system via a crafted request.",
+                    "exploits": {
+                        "exploit_available": true,
+                        "references": [
+                            {
+                                "source": "github",
+                                "type": "EXPLOIT",
+                                "url": "https://github.com/apache/httpd/security/advisories/GHSA-example-1234"
+                            }
+                        ]
+                    },
+                    "seen_wild": true,
+                    "epss_score": 0.87,
+                    "taxonomy": {
+                        "cvss": {
+                            "3.1": {
+                                "version": "3.1",
+                                "severity": 5,
+                                "score": 9.8,
+                                "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H"
+                            }
+                        },
+                        "cpes": [
+                            {
+                                "vendor": "apache",
+                                "product": "http_server",
+                                "version": "2.4.50"
+                            }
+                        ]
+                    },
+                    "remediations": [
+                        {
+                            "source": "vendor",
+                            "description": "Update to Apache HTTP Server 2.4.51 or later."
+                        }
+                    ]
+                };
+            } else {
+                // Default for other CVEs
+                return {
+                    "_id": cve,
+                    "title": `Generic Vulnerability for ${cve}`,
+                    "description": "This is a placeholder description for a generic vulnerability.",
+                    "exploits": {
+                        "exploit_available": false
+                    },
+                    "seen_wild": false,
+                    "epss_score": 0.52,
+                    "taxonomy": {
+                        "cvss": {
+                            "3.1": {
+                                "version": "3.1",
+                                "severity": 3,
+                                "score": 6.5,
+                                "vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N"
+                            }
+                        },
+                        "cpes": [
+                            {
+                                "vendor": "generic",
+                                "product": "software",
+                                "version": "*"
+                            }
+                        ]
+                    },
+                    "remediations": [
+                        {
+                            "source": "vendor",
+                            "description": "Update to the latest version of the affected software."
+                        }
+                    ]
+                };
+            }
+        }
+
+    </script>
+</body>
+</html>     
+            

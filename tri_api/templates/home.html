@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>Security Applications</title>
+    <style>
+        /* body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #141419;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .apps-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        
+        .app-square {
+            width: 180px;
+            height: 180px;
+            background-color: #1e1e2d;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        .app-square:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+        
+        .app-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        
+        .app-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .app-subtitle {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #8e8ea0;
+            text-align: center;
+        }
+        
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: #141419;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo {
+            height: 32px;
+            width: 32px;
+            background-color: #333;
+            border-radius: 6px;
+        } */
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #1e2130;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        .apps-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+        }
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+        .app-square {
+            width: 180px;
+            height: 180px;
+            background-color: #2d3748;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .app-square:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+        .app-icon {
+            width: 64px;
+            height: 64px;
+            color: 	#32ffff;
+            margin: 20px auto;
+        }
+        .app-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 600;  
+            color: #32ffff;
+            letter-spacing: 1.5px;
+            text-transform: uppercase; 
+        }
+        .app-subtitle {
+            margin-top: 16px;
+            font-size: 14px;
+            color: #a0aec0;
+            text-align: center;
+        }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background-color: #171923;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        } 
+        .tm {
+            font-size: 10px;
+            vertical-align: super;
+        } 
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">Trishiras<span class="tm">™</span></div>
+    </div>
+    
+    <div class="apps-container">
+        <div class="app-container">
+            <a href="http://192.168.1.5:8080/botly/" target="_blank" style="text-decoration: none;">
+                <div class="app-square" id="botly-app">
+                    <div class="app-icon" data-lucide="bot"></div>
+                    <div class="app-title">Botly</div>
+                </div>
+            </a>
+            <div class="app-subtitle">RAG Assistant</div>
+        </div>
+        
+        <div class="app-container">
+            <div class="app-square" id="trove-app">
+                <div class="app-icon" data-lucide="shield-ellipsis"></div>
+                <div class="app-title">Trove</div>
+            </div>
+            <div class="app-subtitle">Security Engine</div>
+        </div>
+    </div>
+    
+    <script>
+        lucide.createIcons();
+        document.getElementById('botly-app').addEventListener('click', function(e) {
+            window.open('http://192.168.1.5:8080/botly/', '_blank');
+        });
+        
+        document.getElementById('trove-app').addEventListener('click', function() {
+            window.open('http://192.168.1.5:8080/trove/', '_blank');
+        });
+    </script>
+</body>
+</html>
