@@ -2,6 +2,11 @@
 from tri_api.app import app
 
 
+## Page Routers
+from tri_api.routes.pages.home import router as HomePageRouter
+from tri_api.routes.pages.trove import router as TrovePageRouter
+
+
 ## Super Routers
 from tri_api.routes.super.tasks import router as TaskRouter
 from tri_api.routes.super.user import router as SuperUserRouter
@@ -50,6 +55,10 @@ from tri_api.routes.scanner.static_application_security_testing import (
 
 ## API Registered Routers
 
+
+#
+app.include_router(HomePageRouter)
+app.include_router(TrovePageRouter)
 
 #
 app.include_router(TaskRouter)

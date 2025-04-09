@@ -87,6 +87,7 @@ class ScannerExceptionMessage(Enum):
 
 
 class RouteEnum(Enum):
+    home = "/"
     api = "/api"
     mail = "/mail"
     user = "/user"
@@ -111,6 +112,7 @@ class RouteEnum(Enum):
 
 
 class TroveRouteEnum(Enum):
+    search = "/search"
     trove = "/trove"
     cve = "/cve/{cve_id}"
     cwe = "/cwe/{cwe_id}"
@@ -217,3 +219,9 @@ class AWSOption(Enum):
     s3_bucket = os.getenv("AWS_S3_BUCKET", "tri-db")
     cve_file = f"cve_trove_output_{str(date.today())}_.jsonl"
     cwe_file = f"cwe_trove_output_{str(date.today())}_.jsonl"
+
+
+class TemplatePath(Enum):
+    template_dir = "/usr/src/app/tri_api/templates"
+    home = "home.html"
+    trove = "trove.html"

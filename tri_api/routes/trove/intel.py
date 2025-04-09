@@ -1,8 +1,15 @@
+import pymongo
+from beanie.operators import RegEx
 from tri_api.models.trove.cve import CVE
 from tri_api.models.tenant.user import User
 from tri_api.models.trove.taxonomy import CWE, CAPEC
 from tri_api.support.current_user import current_user
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import (
+    Query,
+    APIRouter,
+    HTTPException,
+    Depends,
+)
 from tri_api.support.enums import (
     RouteEnum,
     ResponseCode,
@@ -66,3 +73,23 @@ async def get_cve_by_id(
         )
 
     return cve
+
+
+@router.get(TroveRouteEnum.search.value)
+async def search(
+    query: str = Query(),
+):
+    if not query:
+        cve_list = []
+    else:
+        cve_list = (
+            await CVE.find(RegEx(CVE.id, r"^{}".format(query.upper())))
+            .sort([(CVE.id, pymongo.DESCENDING)])
+            .limit(3)
+            .to_list()
+        )
+    if cve_list is None:
+        cve_list = []
+    else:
+        cve_list = [cve.id for cve in cve_list]
+    return cve_list
