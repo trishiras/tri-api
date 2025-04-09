@@ -131,7 +131,7 @@ dmypy.json
 
 .tmp/
 tmp/
-temp*
+# temp*
 output/
 test*
 *env
